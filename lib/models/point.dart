@@ -1,10 +1,11 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
+
+import 'package:flutter/services.dart';
 
 class Point {
   final int? id;
   final String name;
-  final Uint8List img;
+  final String img;
 
   Point({
     this.id,
@@ -16,9 +17,9 @@ class Point {
   // columns in the database.
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      'id' :id,
       'name': name,
-      'img': img,
+      'image': img,
     };
   }
 
@@ -26,7 +27,7 @@ class Point {
     return Point(
       id: map['id']?.toInt() ?? 0,
       name: map['name'] ?? '',
-      img: map['description'] ?? '',
+      img: map['image'] ?? '',
     );
   }
 

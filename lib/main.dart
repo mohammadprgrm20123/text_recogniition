@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:text_recognition_flutter/result_screen.dart';
+import 'package:text_recognition_flutter/services/database_service.dart';
 
 void main() {
   runApp(const App());
@@ -15,7 +17,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Text Recognition Flutter',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -39,9 +42,16 @@ class _MainScreenState extends State<MainScreen> with WidgetsBindingObserver {
   CameraController? _cameraController;
 
   final textRecognizer = TextRecognizer();
+  late DatabaseService databaseService;
 
   @override
   void initState() {
+    databaseService = DatabaseService();
+
+    databaseService.database;
+
+    databaseService.insertAll();
+
     super.initState();
     WidgetsBinding.instance.addObserver(this);
 
